@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name — Portfolio</title>
+  <meta name="description" content="Product and brand designer portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // 첫 페인트 전에 테마를 적용해 깜빡임 방지
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <!-- ───────── Header ───────── -->
+  <header class="header">
+    <a href="#top" class="pill brand" aria-label="Home">
+      <span class="brand-first">YOUR</span><span class="brand-last">NAME</span><sup class="brand-year">(25)</sup>
+    </a>
+    <nav class="pill nav" aria-label="Main">
+      <a href="#work" data-section="work">Work</a>
+      <a href="#info" data-section="info">Info</a>
+      <a href="#research" data-section="research">Research</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M8 1a7 7 0 0 0 0 14z" fill="currentColor" />
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ───────── Hero ───────── -->
+    <section class="hero">
+      <p class="hero-intro reveal">
+        Product and brand designer based in Seoul.<br />
+        Creating and leading brands and products from<br />
+        ideas to impactful products.
+      </p>
+      <div class="pill clients reveal" aria-label="Selected clients">
+        <span class="client client--sans">Client One</span>
+        <span class="client client--wide">CLIENT TWO</span>
+        <span class="client client--script">Client Three</span>
+      </div>
+      <a href="#work" class="scroll-hint" aria-label="Scroll to work">Scroll ↓</a>
+    </section>
+
+    <!-- ───────── Showcase (full-bleed) ───────── -->
+    <section class="showcase" aria-label="Featured visual">
+      <div class="showcase-bg"></div>
+      <div class="device">
+        <div class="device-screen">
+          <span class="dot-text">YOUR PROJECT</span>
+        </div>
+        <div class="device-input">
+          <span>●</span><span>Add a note</span><span class="device-go">→</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── Experience (scroll-driven card) ───────── -->
+    <section class="experience" aria-label="Experience">
+      <div class="experience-sticky">
+        <p class="exp-left">10 years of<br />design experience</p>
+        <p class="exp-right">Product / Brand / Software<br />OS / AI / Finance / Fashion</p>
+        <div class="exp-card" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ───────── Featured projects ───────── -->
+    <section id="work" class="featured" aria-label="Featured work"></section>
+
+    <!-- ───────── Project grid ───────── -->
+    <section class="grid-section" aria-label="All work">
+      <div class="grid-head">
+        <span>Index</span>
+        <div class="filters" role="tablist"></div>
+      </div>
+      <div class="grid"></div>
+    </section>
+
+    <!-- ───────── Info ───────── -->
+    <section id="info" class="info">
+      <div class="info-col">
+        <h2 class="label">Info</h2>
+        <p class="info-lead">
+          I'm a product and brand designer working across software, identity and
+          physical products. I care about clarity, craft and details that make
+          people smile.
+        </p>
+      </div>
+      <div class="info-col">
+        <h2 class="label">Experience</h2>
+        <ul class="list">
+          <li><span>Company One</span><span>Senior Designer</span><span>2023 — Now</span></li>
+          <li><span>Company Two</span><span>Product Designer</span><span>2020 — 2023</span></li>
+          <li><span>Studio Three</span><span>Brand Designer</span><span>2017 — 2020</span></li>
+        </ul>
+        <h2 class="label">Contact</h2>
+        <ul class="list list--links">
+          <li><a href="mailto:hello@example.com">Email</a><span>hello@example.com</span></li>
+          <li><a href="#" target="_blank" rel="noopener">Instagram</a><span>@yourname</span></li>
+          <li><a href="#" target="_blank" rel="noopener">LinkedIn</a><span>/in/yourname</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ───────── Research ───────── -->
+    <section id="research" class="research">
+      <h2 class="label">Research</h2>
+      <ul class="research-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span class="year"></span> Your Name</span>
+    <span class="clock" aria-label="Local time"></span>
+    <a href="#top">Back to top ↑</a>
+  </footer>
+
+  <!-- ───────── Project modal ───────── -->
+  <dialog class="modal" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="Close">Close ✕</button>
+    <div class="modal-media"></div>
+    <div class="modal-body">
+      <h3 id="modal-title" class="modal-title"></h3>
+      <p class="modal-tags"></p>
+      <p class="modal-desc"></p>
+    </div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
