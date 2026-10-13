@@ -15,6 +15,7 @@ python3 -m http.server 8000   # → http://localhost:8000
 | 무엇 | 어디서 |
 | --- | --- |
 | 프로젝트, 피처, 리서치, 경험 카드 | `data.js` |
+| 프로젝트 상세 페이지 구성 | `data.js`의 각 프로젝트 `detail.blocks` (사용법은 파일 상단 주석) |
 | 이름, 소개 문구, 클라이언트, 경력, 연락처 | `index.html` |
 | 색상, 폰트, 간격 | `styles.css` 맨 위 `:root` 토큰 |
 
@@ -27,4 +28,5 @@ python3 -m http.server 8000   # → http://localhost:8000
 - 풀블리드 쇼케이스(패럴랙스 + 디바이스 목업)
 - 스크롤에 따라 커지며 이미지가 바뀌는 경험 섹션
 - 피처 프로젝트(좌우 교차 배치), 태그 필터가 있는 4열 프로젝트 그리드
-- 프로젝트 클릭 시 상세 모달, 스크롤 등장 애니메이션, 모바일 대응, reduced-motion 대응
+- 프로젝트 상세 페이지(`project.html?p=slug`): 12칸 그리드(콘텐츠 9칸 + 섹션 인덱스 3칸), 블록(section / text / panel / row) 단위 배치, 다음 프로젝트 링크
+- 스크롤 등장 애니메이션, 모바일 대응, reduced-motion 대응

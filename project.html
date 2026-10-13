@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Project — Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="pill brand" aria-label="Home">
+      <span class="brand-first">YOUR</span><span class="brand-last">NAME</span><sup class="brand-year">(25)</sup>
+    </a>
+    <nav class="pill nav" aria-label="Main">
+      <a href="index.html#work" class="is-active">Work</a>
+      <a href="index.html#info">Info</a>
+      <a href="index.html#research">Research</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M8 1a7 7 0 0 0 0 14z" fill="currentColor" />
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="project"></main>
+
+  <footer class="footer">
+    <span>© <span class="year"></span> Your Name</span>
+    <span class="clock" aria-label="Local time"></span>
+    <a href="#top" onclick="scrollTo({ top: 0 }); return false;">Back to top ↑</a>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="project.js"></script>
+</body>
+</html>

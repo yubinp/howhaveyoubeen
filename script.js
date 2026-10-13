@@ -1,16 +1,7 @@
 (() => {
   const data = window.PORTFOLIO;
-  const $ = (s, el = document) => el.querySelector(s);
+  const { $, esc, fill, projectUrl, observeReveal, initChrome } = window.UI;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const esc = (s) =>
-    String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
-  // 이미지가 있으면 이미지, 없으면 그라디언트 플레이스홀더
-  const fill = (item) =>
-    item.image
-      ? `url("${encodeURI(item.image)}") center / cover`
-      : `linear-gradient(135deg, ${item.colors[0]}, ${item.colors[1]})`;
 
   const media = (item, extra = "") => `
     <div class="media ${extra}">
@@ -21,29 +12,29 @@
   /* ───────── Featured ───────── */
   $(".featured").innerHTML = data.featured
     .map(
-      (p, i) => `
-      <article class="feature reveal" data-kind="featured" data-index="${i}" tabindex="0">
+      (p) => `
+      <a class="feature reveal" href="${projectUrl(p)}">
         ${media(p)}
         <div class="feature-text">
           <h3>${esc(p.title)}</h3>
           <p>${esc(p.desc)}</p>
           <p class="tags">${p.tags.map(esc).join(" / ")}</p>
         </div>
-      </article>`
+      </a>`
     )
     .join("");
 
   /* ───────── Grid + filters ───────── */
   $(".grid").innerHTML = data.projects
     .map(
-      (p, i) => `
-      <article class="card reveal" data-kind="projects" data-index="${i}" data-tags="${esc(p.tags.join("|"))}" tabindex="0">
+      (p) => `
+      <a class="card reveal" href="${projectUrl(p)}" data-tags="${esc(p.tags.join("|"))}">
         ${media(p)}
         <div class="card-meta">
           <h3>${esc(p.title)}</h3>
           <p class="tags">${p.tags.map(esc).join(" / ")}</p>
         </div>
-      </article>`
+      </a>`
     )
     .join("");
 
@@ -75,50 +66,8 @@
     .map((r) => `<li class="reveal"><a href="${esc(r.link)}"><span>${esc(r.title)}</span><span>${esc(r.year)}</span></a></li>`)
     .join("");
 
-  /* ───────── Modal ───────── */
-  const modal = $(".modal");
-  const openProject = (el) => {
-    const p = data[el.dataset.kind][+el.dataset.index];
-    $(".modal-media").outerHTML = media(p, "modal-media");
-    $(".modal-title").textContent = p.title;
-    $(".modal-tags").textContent = p.tags.join(" / ");
-    $(".modal-desc").textContent = p.desc || "";
-    modal.showModal();
-  };
-  document.addEventListener("click", (e) => {
-    const el = e.target.closest(".card, .feature");
-    if (el) openProject(el);
-  });
-  document.addEventListener("keydown", (e) => {
-    const el = e.target.closest?.(".card, .feature");
-    if (el && (e.key === "Enter" || e.key === " ")) {
-      e.preventDefault();
-      openProject(el);
-    }
-  });
-  $(".modal-close").addEventListener("click", () => modal.close());
-  modal.addEventListener("click", (e) => e.target === modal && modal.close());
-
-  /* ───────── Theme ───────── */
-  const root = document.documentElement;
-  $(".theme-toggle").addEventListener("click", () => {
-    const next = root.dataset.theme === "light" ? "dark" : "light";
-    root.dataset.theme = next;
-    try { localStorage.setItem("theme", next); } catch (e) {}
-  });
-
-  /* ───────── Reveal on scroll ───────── */
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((en) => {
-        if (en.isIntersecting) {
-          en.target.classList.add("is-in");
-          io.unobserve(en.target);
-        }
-      }),
-    { threshold: 0.12 }
-  );
-  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  initChrome();
+  observeReveal();
 
   /* ───────── Active nav ───────── */
   const navLinks = document.querySelectorAll(".nav a");
@@ -176,14 +125,4 @@
   card.style.background = fill(cards[0]);
   onScroll();
 
-  /* ───────── Footer ───────── */
-  $(".year").textContent = new Date().getFullYear();
-  const clock = $(".clock");
-  const tick = () => {
-    clock.textContent =
-      "Seoul " +
-      new Date().toLocaleTimeString("en-GB", { timeZone: "Asia/Seoul", hour: "2-digit", minute: "2-digit", second: "2-digit" });
-  };
-  tick();
-  setInterval(tick, 1000);
 })();
